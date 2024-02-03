@@ -3,13 +3,11 @@
         <button nz-button [nzType]="'primary'" (click)="showAddFuelModal()"><span>Add</span></button>
         <br />
         <br />
-        <p>Table Fuels </p>
         <nz-table #basicTable [nzData]="fuels" nzSize="small" nzShowSizeChanger [nzFrontPagination]="true"
             [nzPageSize]="size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
             [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective [nzBordered]="true">
             <thead>
                 <tr>
-                    <th>ID</th>
                     <th>Type</th>
                     <th>Price</th>
                     <th>Total</th>
@@ -20,10 +18,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let fuel of fuels">
-                    <td>{{ fuel.id }}</td>
                     <td>{{ fuel.type }}</td>
                     <td>{{ fuel.price }}</td>
-                    <td>{{ fuel.totale }}</td>
+                    <td>{{ fuel.totale }} DH</td>
+                    <td>{{ fuel.litre  }}</td>
                     <td>{{ fuel.date }}</td>
                     <td>
                         <button nz-button nzType="primary" (click)="showAddFuelModal(true, fuel)">Update</button>
