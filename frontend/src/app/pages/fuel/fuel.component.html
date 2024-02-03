@@ -1,0 +1,68 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <button nz-button [nzType]="'primary'" (click)="showAddFuelModal()"><span>Add</span></button>
+        <br />
+        <br />
+        <p>Table Fuels </p>
+        <nz-table #basicTable [nzData]="fuels" nzSize="small" nzShowSizeChanger [nzFrontPagination]="true"
+            [nzPageSize]="size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
+            [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective [nzBordered]="true">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Litre</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fuel of fuels">
+                    <td>{{ fuel.id }}</td>
+                    <td>{{ fuel.type }}</td>
+                    <td>{{ fuel.price }}</td>
+                    <td>{{ fuel.totale }}</td>
+                    <td>{{ fuel.date }}</td>
+                    <td>
+                        <button nz-button nzType="primary" (click)="showAddFuelModal(true, fuel)">Update</button>
+                        <button nz-button nzType="link" (click)="deleteFuel(fuel.id)">Delete</button>
+                      </td>
+                      
+                </tr>
+            </tbody>
+        </nz-table>
+
+    </div>
+
+    <nz-modal [(nzVisible)]="isModalVisible" [nzTitle]="'Add New Fuel'" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" >
+        <ng-container *nzModalContent>
+            <form nz-form [formGroup]="fuelForm">
+                    <nz-form-item>
+                        <nz-form-label [nzSm]="6" nzRequired>Type</nz-form-label>
+                        <nz-select nzAllowClear formControlName="type" nzPlaceHolder="Select Type">
+                            <nz-option *ngFor="let fuelType of fuelTypes" [nzLabel]="fuelType" [nzValue]="fuelType"></nz-option>
+                          </nz-select>
+                          
+                    </nz-form-item>
+                 
+                    <nz-form-item>
+                        <nz-form-label [nzSm]="6" nzRequired>Total</nz-form-label>
+                        <nz-form-control [nzSm]="14">
+                            <input nz-input type="number" formControlName="totale" />
+                        </nz-form-control>
+                    </nz-form-item>
+                    <!-- <nz-form-item>
+                        <nz-form-label [nzSm]="6" nzRequired>Date</nz-form-label>
+                        <nz-form-control [nzSm]="14">
+                            <nz-date-picker nzFormat="yyyy-MM-dd" formControlName="date"></nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item> -->
+                </form>
+          </ng-container>
+        
+    </nz-modal>
+    
+
+</div>
